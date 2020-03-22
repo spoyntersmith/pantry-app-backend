@@ -9,8 +9,8 @@ class Category extends Model
     /**
      * Get items in the category
      */
-    $this->public function items()
+    public function items()
     {
-        return $this->hasMany('App\Items', 'foreign_key');
+        return $this->hasMany('App\Item', 'foreign_key');
     }
 }

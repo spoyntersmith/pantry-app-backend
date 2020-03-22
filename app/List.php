@@ -11,7 +11,7 @@ class List extends Model
      */
     public function user()
     {
-        return $this->hasOne('App\User', 'foreign_key', 'local_key');
+        return $this->hasOne('App\User', 'foreign_key');
     }
 
     /**
@@ -19,6 +19,6 @@ class List extends Model
      */
     public function items() 
     {
-        return $this->hasMany('App\Items');
+        return $this->hasMany('App\Item');
     }
 }
