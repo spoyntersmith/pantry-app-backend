@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class ItemList extends Model
 {
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'userId',
+    ];
+
+    /**
      * Get the List's User
      */
     public function user()

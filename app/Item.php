@@ -8,8 +8,12 @@ class Item extends Model
 {
     /**
      * The attributes that are mass assignable
+     * 
+     * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'name','expiryDate','bestBeforeDate','quantity','weight','listItemId','categoryId'
+    ];
 
     /**
      * Get the List that owns the Item
