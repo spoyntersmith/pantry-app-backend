@@ -20,11 +20,11 @@ class CreateItemsTable extends Migration
             $table->date('bestBeforeDate');
             $table->integer('quantity');
             $table->float('weight');
-            $table->unsignedBigInteger('listId');
+            $table->unsignedBigInteger('listItemId');
             $table->unsignedBigInteger('categoryId');
             $table->timestamps();
 
-            $table->foreign('listId')->references('id')->on('lists')->onDelete('cascade');
+            $table->foreign('listItemId')->references('id')->on('item_lists')->onDelete('cascade');
             $table->foreign('categoryId')->references('id')->on('categories');
         });
     }
