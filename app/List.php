@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class List extends Model 
+class ItemList extends Model
 {
     /**
      * Get the List's User
@@ -17,7 +17,7 @@ class List extends Model
     /**
      * Get the items in the List
      */
-    public function items() 
+    public function items()
     {
         return $this->hasMany('App\Item');
     }
