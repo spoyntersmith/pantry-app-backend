@@ -16,10 +16,10 @@ class CreateItemsTable extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->string('name')->index();
-            $table->date('expiryDate');
-            $table->date('bestBeforeDate');
-            $table->integer('quantity');
-            $table->float('weight');
+            $table->date('expiryDate')->nullable();
+            $table->date('bestBeforeDate')->nullable();
+            $table->integer('quantity')->default(1);
+            $table->float('weight')->default(0.0);
             $table->unsignedBigInteger('listItemId');
             $table->unsignedBigInteger('categoryId');
             $table->timestamps();
