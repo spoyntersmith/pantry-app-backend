@@ -20,6 +20,6 @@ class Category extends Model
      */
     public function items()
     {
-        return $this->hasMany('App\Item', 'foreign_key');
+        return $this->hasMany('App\Item');
     }
 }

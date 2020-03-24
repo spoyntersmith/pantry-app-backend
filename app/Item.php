@@ -20,7 +20,7 @@ class Item extends Model
      */
     public function itemList()
     {
-        return $this->belongsTo('App\ItemList', 'foreign_key');
+        return $this->belongsTo('App\ItemList');
     }
 
     /**
@@ -28,6 +28,6 @@ class Item extends Model
      */
     public function category()
     {
-        return $this->belongsTo('App\Category', 'foreign_key');
+        return $this->belongsTo('App\Category');
     }
 }

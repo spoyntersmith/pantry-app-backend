@@ -40,7 +40,7 @@ class User extends Authenticatable
     /**
      * Get the lists for the user
      */
-    public function lists()
+    public function itemLists()
     {
         return $this->hasMany('App\ItemList');
     }

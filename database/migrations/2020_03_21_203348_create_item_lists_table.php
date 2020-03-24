@@ -16,10 +16,10 @@ class CreateItemListsTable extends Migration
         Schema::create('item_lists', function (Blueprint $table) {
             $table->id();
             $table->string('name')->index();
-            $table->unsignedBigInteger('userId');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
-            $table->unique('name', 'userId');
-            $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
+            $table->unique('name', 'user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
