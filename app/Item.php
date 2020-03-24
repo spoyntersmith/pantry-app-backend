@@ -12,7 +12,7 @@ class Item extends Model
      * @var array
      */
     protected $fillable = [
-        'name','expiryDate','bestBeforeDate','quantity','weight','listItemId','categoryId'
+        'name','expiryDate','bestBeforeDate','quantity','weight','list_item_id','category_id'
     ];
 
     /**
