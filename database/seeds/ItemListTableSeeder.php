@@ -11,6 +11,6 @@ class ItemListTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory('App\ItemList', 20)->create();
     }
 }
