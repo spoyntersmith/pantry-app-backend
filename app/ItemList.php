@@ -12,7 +12,7 @@ class ItemList extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'userId',
+        'name', 'user_id',
     ];
 
     /**
