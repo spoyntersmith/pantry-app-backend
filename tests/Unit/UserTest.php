@@ -5,21 +5,28 @@ namespace Tests\Unit;
 use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 
 class UserTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithFaker;
+    
     /** @test */
     public function createUser()
     {
-        $user = factory(User::class)->create();
-        $name = $user->name;
+        
+        $data = [
+            "name" => $this->faker->name,
+            "email" => $this->faker->safeEmail,
+            "password" => "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+            "email_verified_at" => now()
+        ];
+                
+        $user = User::create($data);
 
-        $user->save();
+        $storedUser = User::where('email', $data["email"])->first();
 
-        $storedUser = User::where('email', $user->email)->first();
-
-        $this->assertEquals($user->email, $storedUser->email);
+        $this->assertEquals($data["email"], $storedUser->email);
         print 'user can be created';
     
     }
