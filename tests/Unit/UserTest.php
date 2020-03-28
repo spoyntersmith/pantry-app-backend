@@ -7,6 +7,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 
+
 class UserTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
@@ -26,7 +27,13 @@ class UserTest extends TestCase
 
         $storedUser = User::where('email', $data["email"])->first();
 
+        $this->assertEquals($data["name"], $storedUser->name);
+        
+        $this->assertDatabaseHas('users', ['email' => $storedUser->email]);
+        
         $this->assertEquals($data["email"], $storedUser->email);
+        $this->assertEquals($data["password"], $storedUser->password);
+        // TODO: check email_verified_at
         print 'user can be created';
     
     }
