@@ -33,7 +33,14 @@ class ItemTest extends TestCase
 
         $storedItem = Item::where('name', $item->name)->first();
 
-        $this->assertEquals($item->name, $storedItem->name);
+        $this->assertEquals($data['name'], $storedItem->name);
+        // $this->assertEquals(date($data['expiryDate']), $storedItem->expiryDate);
+        // $this->assertEquals(date($data['bestBeforeDate']), $storedItem->bestBeforeDate);
+        $this->assertEquals($data['quantity'], $storedItem->quantity);
+        $this->assertEquals($data['weight'], $storedItem->weight);
+        $this->assertEquals($data['item_list_id'], $storedItem->item_list_id);
+        $this->assertEquals($data['category_id'], $storedItem->category_id);
+
         print 'item can be created';
     }
 }
