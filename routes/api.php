@@ -28,3 +28,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Simplified version of the Resource Route
 Route::resource('categories', 'CategoryController');
 Route::resource('itemlists', 'ItemListController');
+Route::resource('items', 'ItemController');

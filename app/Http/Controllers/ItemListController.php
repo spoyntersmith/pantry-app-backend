@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Exception;
 use App\ItemList;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreItemListRequest;
 
 class ItemListController extends Controller
@@ -91,15 +91,8 @@ class ItemListController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $il = ItemList::find($id);
-            if ($il == null) {
-                return response()->json(['message' => 'Item List not found'], 404);
-            }
-            $il->delete();
-            return response()->json([], 204); // No Content
-        } catch (Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 500);
-        }
+        ItemList::destroy($id);
+
+        return response()->noContent();
     }
 }

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Item;
+use Exception;
 use App\Category;
+use App\ItemList;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\StoreItemRequest;
 
-class CategoryController extends Controller
+class ItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +18,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return Category::paginate(10);
+        return Item::paginate(10);
     }
 
     /**
@@ -24,13 +27,20 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreItemRequest $request)
     {
         try {
-            $cat = new Category();
-            $cat->name = $request->name;
-            $cat->save();
-            return response()->json($cat, 200);
+            $item = new Item();
+            $item->name     = $request->name;
+            $item->quantity = $request->quantity;
+            $item->weight   = $request->weight;
+            $item->itemList()->associate(ItemList::find($request->item_list_id));
+            $item->category()->associate(Category::find($request->category_id));
+
+            // Once we have authentication up and running
+            // $il->user()->associate(auth()->user);
+            $item->save();
+            return response()->json($item, 200);
         } catch (Exception $e) {
             return response()->json(['message' => $e->getMessage()], 500);
         }
@@ -45,11 +55,11 @@ class CategoryController extends Controller
     public function show($id)
     {
         try {
-            $cat = Category::find($id);
-            if ($cat == null) {
-                return response()->json(['message' => 'Category not found'], 404);
+            $item = Item::find($id);
+            if ($item == null) {
+                return response()->json(['message' => 'Item not found'], 404);
             }
-            return response()->json($cat, 200);
+            return response()->json($item, 200);
         } catch (Exception $e) {
             return response()->json(['message' => $e->getMessage()], 500);
         }
@@ -62,16 +72,18 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreCategoryRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try {
-            $cat = Category::find($id);
-            if ($cat == null) {
-                return response()->json(['message' => 'Category not found'], 404);
+            $item = Item::find($id);
+            if ($item == null) {
+                return response()->json(['message' => 'Item not found'], 404);
             }
-            $cat->name = $request->name;
-            $cat->save();
-            return response()->json($cat, 200);
+            $item->name = $request->name;
+            // TODO: Assess if modified/created by fields will come in handy
+            //$il->user = User::find(1);
+            $item->save();
+            return response()->json($item, 200);
         } catch (Exception $e) {
             return response()->json(['message' => $e->getMessage()], 500);
         }
@@ -85,7 +97,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::destroy($id);
+        Item::destroy($id);
 
         return response()->noContent();
     }
