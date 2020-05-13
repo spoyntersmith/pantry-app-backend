@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
 use App\Item;
-use App\User;
+use Exception;
+use App\Category;
+use App\ItemList;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreItemRequest;
-use App\ItemList;
 
 class ItemController extends Controller
 {
@@ -31,11 +31,11 @@ class ItemController extends Controller
     {
         try {
             $item = new Item();
-            foreach ($request as $key => $value) {
-                $item->$key = $request->$key;
-            }
-            $item->itemList()->associate(ItemList::find(1));
-            $item->category()->associate(Category::find(1));
+            $item->name     = $request->name;
+            $item->quantity = $request->quantity;
+            $item->weight   = $request->weight;
+            $item->itemList()->associate(ItemList::find($request->item_list_id));
+            $item->category()->associate(Category::find($request->category_id));
 
             // Once we have authentication up and running
             // $il->user()->associate(auth()->user);
